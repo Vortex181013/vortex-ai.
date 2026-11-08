@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b1d">
+<title>Vortex AI</title>
+<style>
+:root{color-scheme:dark;--bg:#080a19;--panel:#11152b;--line:#252b50;--purple:#9167ff;--cyan:#4bdcff;--muted:#9aa3c7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#30205e 0%,transparent 48%),radial-gradient(circle at 90% 65%,#102b52 0%,transparent 32%),var(--bg);color:#f5f5ff;font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:760px;margin:auto;min-height:100vh;display:flex;flex-direction:column;padding:18px 14px calc(14px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;gap:12px;padding:8px 4px 18px;border-bottom:1px solid #ffffff18}
+.logo{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#8757ff,#28c8ef);box-shadow:0 0 28px #865aff66;font-size:25px}
+h1{font-size:20px;margin:0;letter-spacing:.4px} .sub{font-size:11px;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.status{margin-left:auto;border:1px solid #285e62;color:#72f5ce;border-radius:30px;padding:6px 10px;font-size:11px}
+main{flex:1;padding:24px 2px 18px;display:flex;flex-direction:column;gap:15px}
+.hero{text-align:center;padding:20px 8px 12px}
+.orb{width:86px;height:86px;margin:0 auto 16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b9a0ff,#7046e8 40%,#172e77 72%,#071225);box-shadow:0 0 28px #885dff99,0 0 70px #4bdcff33;display:grid;place-items:center;font-size:36px}
+.hero h2{font-size:23px;margin:0 0 7px}.hero p{color:var(--muted);margin:0;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:17px}
+.chip{background:#171b36;border:1px solid var(--line);color:#d9dcff;padding:9px 12px;border-radius:20px;font-size:12px}
+.messages{display:flex;flex-direction:column;gap:12px}
+.msg{max-width:88%;padding:12px 14px;border-radius:17px;line-height:1.45;font-size:14px;white-space:pre-wrap}
+.bot{align-self:flex-start;background:linear-gradient(135deg,#171d3c,#12182c);border:1px solid #343b68;border-top-left-radius:5px}
+.user{align-self:flex-end;background:linear-gradient(135deg,#7148d9,#3659b9);border-top-right-radius:5px}
+.composer{position:sticky;bottom:0;background:#0c1023eF;border:1px solid #343b63;border-radius:19px;padding:8px;display:flex;gap:8px;backdrop-filter:blur(12px)}
+textarea{resize:none;min-height:44px;max-height:120px;flex:1;background:transparent;border:0;outline:0;color:white;font:14px system-ui;padding:12px 8px}
+button{border:0;color:white;cursor:pointer;font:inherit}
+.send{width:46px;border-radius:14px;background:linear-gradient(135deg,#9a68ff,#347ce8);font-size:20px}
+.note{text-align:center;color:#7780a5;font-size:10px;padding:10px 0 0}
+button:active{transform:scale(.97)}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">✦</div><div><h1>VORTEX AI</h1><div class="sub">YOUR COSMIC AI ASSISTANT</div></div><div class="status">● DEMO</div></header>
+<main>
+<section class="hero" id="welcome"><div class="orb">✧</div><h2>Привет, исследователь!</h2><p>Я Vortex. Готов отправиться с тобой за ответами.</p>
+<div class="chips"><button class="chip" data-prompt="Расскажи интересный факт о космосе">🌌 Факт о космосе</button><button class="chip" data-prompt="Помоги придумать идею для игры">🎮 Идея для игры</button><button class="chip" data-prompt="Объясни сложную тему простыми словами">🧠 Объясни тему</button></div></section>
+<section class="messages" id="messages"><div class="msg bot">Связь установлена! 🚀 Пока это демонстрационная версия интерфейса: ответы здесь заранее подготовлены, настоящий ИИ подключим следующим этапом.</div></section>
+</main>
+<form class="composer" id="form"><textarea id="input" rows="1" placeholder="Напиши сообщение Vortex..."></textarea><button class="send" aria-label="Отправить">➤</button></form>
+<div class="note">VORTEX AI · PROTOTYPE 0.1 · DEMO MODE</div>
+</div>
+<script>
+const form=document.querySelector('#form'),input=document.querySelector('#input'),messages=document.querySelector('#messages'),welcome=document.querySelector('#welcome');
+function send(text){text=text.trim();if(!text)return;welcome.style.display='none';const u=document.createElement('div');u.className='msg user';u.textContent=text;messages.append(u);input.value='';const b=document.createElement('div');b.className='msg bot';b.textContent='Я получил сообщение! ✨ Сейчас это демо-интерфейс без подключения к настоящей ИИ-модели. Следующим шагом добавим безопасный сервер и подключим ИИ.';messages.append(b);window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+form.addEventListener('submit',e=>{e.preventDefault();send(input.value)});document.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.prompt)));
+</script>
+</body></html>
